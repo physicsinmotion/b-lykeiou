@@ -293,7 +293,7 @@ const $=document.getElementById("app"),$$=i=>document.getElementById(i);
    Βάλε εδώ τη διεύθυνση του Google Apps Script (βλέπε ΟΔΗΓΙΕΣ) και το ίδιο κλειδί με του script.
    Αν η RESULTS_URL είναι κενή, δεν στέλνεται τίποτα. */
 /* Β΄ Λυκείου: βάλε εδώ το link ενός ΔΙΚΟΥ ΤΗΣ Apps Script (αντίγραφο του script της Α΄), ώστε τα αποτελέσματα και η κατάταξη να μη μπλέκονται με την Α΄. Κενό = τα αποτελέσματα μένουν στο κινητό. */
-const RESULTS_URL="https://script.google.com/macros/s/AKfycbyz3Oa8hhKuocMgJxVGkfZ0lKNZmGHJsvK5ZPo1ZOyoeE0semfrOLCX_0O46dY-ThYX/exec",RESULTS_KEY="pimB-2026",APPV="pimB-v3";
+const RESULTS_URL="https://script.google.com/macros/s/AKfycbyz3Oa8hhKuocMgJxVGkfZ0lKNZmGHJsvK5ZPo1ZOyoeE0semfrOLCX_0O46dY-ThYX/exec",RESULTS_KEY="pimB-2026",APPV="pimB-v4";
 /* ίδιο origin με την εφαρμογή της Α΄ (github.io): όλα τα κλειδιά με πρόθεμα pimB: για να μη μπλέκονται */
 const SKP="pimB:",st={get(k,d){try{return JSON.parse(localStorage.getItem(SKP+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(SKP+k,JSON.stringify(v))}catch(e){}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
