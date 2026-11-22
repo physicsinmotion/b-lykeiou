@@ -281,8 +281,11 @@ h1{text-shadow:0 0 18px rgba(34,211,238,.35)}
 .hero .orb i{position:absolute;left:50%;top:-3px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#A3E635;box-shadow:0 0 8px 2px rgba(163,230,53,.6)}
 @keyframes orbit{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.hero .orb{animation:none!important}}
+
+.katex{font-size:1.12em}.opt .katex,.why .katex{white-space:nowrap}
 </style></head><body><main id="app"></main>
 <footer class="cr"><span>Created &amp; developed by <b>Spiros Voikopoulos</b> · 2026</span></footer>
+<link rel="stylesheet" href="katex/katex.min.css"><script src="katex/katex.min.js"></script>
 <script src="questions.js"></script>
 <script>
 const $=document.getElementById("app"),$$=i=>document.getElementById(i);
@@ -290,12 +293,14 @@ const $=document.getElementById("app"),$$=i=>document.getElementById(i);
    Βάλε εδώ τη διεύθυνση του Google Apps Script (βλέπε ΟΔΗΓΙΕΣ) και το ίδιο κλειδί με του script.
    Αν η RESULTS_URL είναι κενή, δεν στέλνεται τίποτα. */
 /* Β΄ Λυκείου: βάλε εδώ το link ενός ΔΙΚΟΥ ΤΗΣ Apps Script (αντίγραφο του script της Α΄), ώστε τα αποτελέσματα και η κατάταξη να μη μπλέκονται με την Α΄. Κενό = τα αποτελέσματα μένουν στο κινητό. */
-const RESULTS_URL="https://script.google.com/macros/s/AKfycbyz3Oa8hhKuocMgJxVGkfZ0lKNZmGHJsvK5ZPo1ZOyoeE0semfrOLCX_0O46dY-ThYX/exec",RESULTS_KEY="pimB-2026",APPV="pimB-v2";
+const RESULTS_URL="https://script.google.com/macros/s/AKfycbyz3Oa8hhKuocMgJxVGkfZ0lKNZmGHJsvK5ZPo1ZOyoeE0semfrOLCX_0O46dY-ThYX/exec",RESULTS_KEY="pimB-2026",APPV="pimB-v3";
 /* ίδιο origin με την εφαρμογή της Α΄ (github.io): όλα τα κλειδιά με πρόθεμα pimB: για να μη μπλέκονται */
 const SKP="pimB:",st={get(k,d){try{return JSON.parse(localStorage.getItem(SKP+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(SKP+k,JSON.stringify(v))}catch(e){}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 /* fm: escape + δείκτες. _{τελ} ⇒ δείκτης· uμ, Sολ, tολ ⇒ u_μ, S_ολ, t_ολ */
-const fm=s=>esc(s).replace(/_\{([^}]*)\}/g,"<sub>$1</sub>").replace(/(^|[^Α-ωά-ώ])(uμ|Sολ|tολ)(?![Α-ωά-ώ])/g,(m,a,b)=>a+b[0]+"<sub>"+b.slice(1)+"</sub>");
+/* τύποι σε LaTeX ανάμεσα σε $…$ (KaTeX, τοπικά για offline) */
+const fm=s=>String(s).split(/(\$[^$]+\$)/).map(p=>/^\$[^$]+\$$/.test(p)&&window.katex?katex.renderToString(p.slice(1,-1),{throwOnError:false}):fm0(p)).join("");
+const fm0=s=>esc(s).replace(/_\{([^}]*)\}/g,"<sub>$1</sub>").replace(/(^|[^Α-ωά-ώ])(uμ|Sολ|tολ)(?![Α-ωά-ώ])/g,(m,a,b)=>a+b[0]+"<sub>"+b.slice(1)+"</sub>");
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const stars=n=>`<span class="stars" aria-label="${n} από 3 αστέρια">${"★".repeat(n)}<i>${"★".repeat(3-n)}</i></span>`;
 const grade=(c,n)=>n?Math.round(c/n*200)/10:0;
