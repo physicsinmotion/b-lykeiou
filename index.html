@@ -290,7 +290,7 @@ const $=document.getElementById("app"),$$=i=>document.getElementById(i);
    Βάλε εδώ τη διεύθυνση του Google Apps Script (βλέπε ΟΔΗΓΙΕΣ) και το ίδιο κλειδί με του script.
    Αν η RESULTS_URL είναι κενή, δεν στέλνεται τίποτα. */
 /* Β΄ Λυκείου: βάλε εδώ το link ενός ΔΙΚΟΥ ΤΗΣ Apps Script (αντίγραφο του script της Α΄), ώστε τα αποτελέσματα και η κατάταξη να μη μπλέκονται με την Α΄. Κενό = τα αποτελέσματα μένουν στο κινητό. */
-const RESULTS_URL="",RESULTS_KEY="pimB-2026",APPV="pimB-v1";
+const RESULTS_URL="https://script.google.com/macros/s/AKfycbyz3Oa8hhKuocMgJxVGkfZ0lKNZmGHJsvK5ZPo1ZOyoeE0semfrOLCX_0O46dY-ThYX/exec",RESULTS_KEY="pimB-2026",APPV="pimB-v2";
 /* ίδιο origin με την εφαρμογή της Α΄ (github.io): όλα τα κλειδιά με πρόθεμα pimB: για να μη μπλέκονται */
 const SKP="pimB:",st={get(k,d){try{return JSON.parse(localStorage.getItem(SKP+k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(SKP+k,JSON.stringify(v))}catch(e){}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -313,7 +313,7 @@ function login(){setBg("bol");document.body.classList.add("sg");
   <label for="sc">Σχολείο (προαιρετικά)</label><input id="sc" list="scl" maxlength="30" placeholder="π.χ. 1ο ΓΕΛ … ή άφησέ το κενό" autocomplete="off" value="${esc(P&&P.school||"")}"><datalist id="scl">${SCHOOLS.map(s=>`<option value="${esc(s)}">`).join("")}</datalist>
   <p class="bad" id="lge" style="margin:6px 0"></p><button class="btn primary" id="go">▶ Ξεκίνα</button>
   <p class="lgh">Διάλεξε τον κωδικό που θες (ή αυτόν που σου έδωσε ο καθηγητής σου) και θυμήσου τον: τον ξαναγράφεις αν μπεις από άλλη συσκευή. Χωρίς εγγραφή.</p></div>
-  <div class="lgt"><span>🧭 Κεφ. 1</span><span>🏎️ Κεφ. 2</span><span>🧲 Κεφ. 3</span><span>⚡ Κεφ. 4</span></div></div>`;
+  <div class="lgt"><span>🎯 Κεφ. 1</span><span>🌀 Κεφ. 2</span><span>💥 Κεφ. 3</span><span>🎈 Κεφ. 4</span></div></div>`;
   if(RESULTS_URL)Promise.race([fetch(RESULTS_URL+(RESULTS_URL.indexOf("?")<0?"?":"&")+"action=schools").then(r=>r.json()),new Promise((_,j)=>setTimeout(j,3000))]).then(d=>{const dl=$$("scl");if(dl&&d&&d.schools)dl.innerHTML=SCHOOLS.concat(d.schools).map(s=>`<option value="${esc(s)}">`).join("")}).catch(()=>{});
   $$("go").onclick=async()=>{const name=$$("n").value.trim().slice(0,40),code=$$("c").value.trim().toUpperCase(),sch=$$("sc")?schClean($$("sc").value):((P&&P.school)||""),e=$$("lge"),g=$$("go");e.textContent="";
     if(!name||!code){e.textContent="Συμπλήρωσε όνομα και κωδικό.";return}

@@ -1,4 +1,4 @@
-const CACHE = "pimB-v1";
+const CACHE = "pimB-v2";
 const FILES = ["./", "index.html", "questions.js", "manifest.webmanifest", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
